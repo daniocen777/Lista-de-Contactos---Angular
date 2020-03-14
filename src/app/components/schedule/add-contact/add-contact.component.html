@@ -1,0 +1,189 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+        <h1>Añadir un contacto</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <form #form="ngForm" (ngSubmit)="addContact()">
+          <!-- Nombres y apellios -->
+          <div class="row form-group">
+            <!-- Nombre -->
+            <div class="col-md-6 col-12 form-group">
+              <label for="name">Nombre (*)</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                id="name"
+                placeholder="Escribe un nombre"
+                minlength="3"
+                required
+                #name="ngModel"
+                [(ngModel)]="contact.name"
+                [ngClass]="{
+                  'is-valid': name.dirty && !name.errors,
+                  'is-invalid': name.dirty && name.errors
+                }"
+              />
+              <div class="valid-feedback">
+                <span>¡Correcto!</span>
+              </div>
+              <div class="invalid-feedback">
+                <span *ngIf="name.errors?.required">Valor requerido</span>
+                <span *ngIf="name.errors?.minlength"
+                  >Se enecesita mínimo
+                  {{ name.errors?.minlength.requiredLength }} caracteres y
+                  llevas {{ name.errors?.minlength.actualLength }}</span
+                >
+              </div>
+            </div>
+            <!-- Apellido -->
+            <div class="col-md-6 col-12 form-group">
+              <label for="surname">Apellido (*)</label>
+              <input
+                type="text"
+                class="form-control"
+                name="surname"
+                id="surname"
+                placeholder="Escriba sus apellidos"
+                minlength="3"
+                required
+                #surname="ngModel"
+                [(ngModel)]="contact.surname"
+                [ngClass]="{
+                  'is-valid': surname.dirty && !surname.errors,
+                  'is-invalid': surname.dirty && surname.errors
+                }"
+              />
+              <div class="valid-feedback">
+                <span>¡Correcto!</span>
+              </div>
+              <div class="invalid-feedback">
+                <span *ngIf="surname.errors?.required">Valor requerido</span>
+                <span *ngIf="surname.errors?.minlength"
+                  >Se enecesita mínimo
+                  {{ surname.errors?.minlength.requiredLength }} caracteres y
+                  llevas {{ surname.errors?.minlength.actualLength }}</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Descripción -->
+          <div class="row form-group">
+            <div class="col-12 form-group">
+              <label for="description">Descripción contacto</label>
+              <textarea
+                name="description"
+                id="description"
+                class="form-control"
+                maxlength="50"
+                placeholder="Escriba una descripción del contacto"
+                #description="ngModel"
+                [(ngModel)]="contact.description"
+              ></textarea>
+            </div>
+          </div>
+          <!-- Sexo y empresa -->
+          <div class="row form-group">
+            <!-- Sexo -->
+            <div class="col-md-6 col-12 form-group">
+              <label for="sex">Sexo</label>
+              <select
+                name="sex"
+                id="sex"
+                class="custom-select"
+                #sex="ngModel"
+                [(ngModel)]="contact.sex"
+              >
+                <option value="hombre">Masculino</option>
+                <option value="mujer">Femenino</option>
+              </select>
+            </div>
+            <!-- Empresa -->
+            <div class="col-md-6 col-12 form-group">
+              <label for="company">Empresa</label>
+              <input
+                type="company"
+                name="company"
+                id="company"
+                class="form-control"
+                maxlength="20"
+                placeholder="Escriba el nombre de su empresa"
+                #company="ngModel"
+                [(ngModel)]="contact.company"
+              />
+            </div>
+          </div>
+          <!-- teléfono y correo -->
+          <div class="row form-group">
+            <!-- Email -->
+            <div class="col-md-6 col-12 form-group">
+              <label for="email">Correo</label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                class="form-control"
+                placeholder="Escriba su correo"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                required
+                #email="ngModel"
+                [(ngModel)]="contact.email"
+                [ngClass]="{
+                  'is-valid': email.dirty && !email.errors,
+                  'is-invalid': email.dirty && email.errors
+                }"
+              />
+              <div class="valid-feedback">
+                <span>¡Correcto!</span>
+              </div>
+              <div class="invalid-feedback">
+                <span *ngIf="email.errors?.required">Valor requerido</span>
+                <span *ngIf="email.errors?.pattern"
+                  >El formato no es correcto</span
+                >
+              </div>
+            </div>
+            <!-- Teléfono -->
+            <div class="col-md-6 col-12 form-group">
+              <label for="tel">Teléfono (*)</label>
+              <input
+                type="text"
+                name="tel"
+                id="tel"
+                class="form-control"
+                placeholder="Escriba su teléfono"
+                pattern="^(0034|\+34)?(\d\d\d)-? ?(\d\d)-? ?(\d)-? ?(\d)-? ?(\d\d)$"
+                required
+                #telephone="ngModel"
+                [(ngModel)]="contact.telephone"
+                [ngClass]="{
+                  'is-valid': telephone.dirty && !telephone.errors,
+                  'is-invalid': telephone.dirty && telephone.errors
+                }"
+              />
+              <div class="valid-feedback">
+                <span>¡Correcto!</span>
+              </div>
+              <div class="invalid-feedback">
+                <span *ngIf="telephone.errors?.required">Valor requerido</span>
+                <span *ngIf="telephone.errors?.pattern"
+                  >El formato no es correcto</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-block">
+              Añadir contacto
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
